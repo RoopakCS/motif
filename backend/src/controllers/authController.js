@@ -64,10 +64,8 @@ const loginUser = async (req, res) => {
 			token: generateToken(user._id),
 		});
 	} catch (error) {
-		return res
-			.status(500)
-			.json({ message: "Server error", error: error.message });
+		res.status(500).json({ message: "Server error", error: error.message });
 	}
 };
 
-module.exports = {registerUser, loginUser};
+module.exports = { registerUser, loginUser };
