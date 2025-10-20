@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
 	return (
-		<div>
+		<div className="font-poppins">
 			<Router>
 				<Routes>
 					<Route path="/login" element={<Login />} />
