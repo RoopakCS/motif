@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
+import { registerUser } from "../api/api";
 
 function Register() {
 	const [formData, setFormData] = useState({
@@ -12,10 +13,22 @@ function Register() {
 	});
 	const [error, setError] = useState("");
 	const navigate = useNavigate();
-	// const { login } = useContext(AuthContext);
+	const { login } = useContext(AuthContext);
 
-	const handleChange = () => {};
-	const handleSubmit = () => {};
+	const handleChange = (e) => {
+		setFormData({...formData, [e.target.name]: e.target.value})
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		try {
+			const {data} = await registerUser(formData)
+			login(data.user, data.token)
+			navigate("/home")
+		} catch (error) {
+			setError(error.response?.data?.message || "Registration Failed")
+		}
+	};
 
 	return (
 		<div className="min-h-screen flex border-2">
@@ -37,21 +50,24 @@ function Register() {
 							name="username"
 							placeholder="Username"
 							required={true}
+							onChange={handleChange}
 						/>
 						<Input
 							type="email"
 							name="email"
 							placeholder="Email"
 							required={true}
+							onChange={handleChange}
 						/>
 						<Input
 							type="password"
 							name="password"
 							placeholder="Password"
 							required={true}
+							onChange={handleChange}
 						/>
-						<Button type="submit" text="Register"/>
-						<p className="text-center">Don't have an account?</p>
+						<Button type="submit" text="Register" onSubmit={handleSubmit}/>
+						<p className="text-center">Already have an account?</p>
 						<Button type="submit" text="Login"/>
 					</form>
 				</div>
