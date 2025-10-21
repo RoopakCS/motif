@@ -1,10 +1,10 @@
 import React from "react";
 
-function Button({ type, text, onSubmit }) {
+function Button({ type, text, onClick }) {
 	return (
 		<button
 			type={type}
-			onSubmit={onSubmit}
+			onClick={onClick}
 			className="border-2 w-full rounded-md cursor-pointer p-2"
 		>
 			{text}

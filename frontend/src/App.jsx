@@ -5,8 +5,9 @@ import {
 	Navigate,
 } from "react-router-dom";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 import { useContext } from "react";
-import { AuthContext } from "./context/authContext";
+import { AuthContext, AuthProvider } from "./context/authContext";
 import Register from "./pages/Register";
 
 const ProtectedRoute = ({ children }) => {
@@ -17,12 +18,15 @@ const ProtectedRoute = ({ children }) => {
 function App() {
 	return (
 		<div className="font-poppins">
-			<Router>
-				<Routes>
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
-				</Routes>
-			</Router>
+			<AuthProvider>
+				<Router>
+					<Routes>
+						<Route path="/login" element={<Login />} />
+						<Route path="/register" element={<Register />} />
+						<Route path="/home" element={<Home />} />
+					</Routes>
+				</Router>
+			</AuthProvider>
 		</div>
 	);
 }

@@ -44,7 +44,7 @@ function Register() {
 				<div className="w-full max-w-sm">
 					<h1 className="text-4xl font-extrabold mb-2">Welcome!</h1>
 					<h2 className="text-2xl font-bold mb-6">Sign Up</h2>
-					<form action="" className="flex flex-col space-y-4">
+					<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 						<Input
 							type="text"
 							name="username"
@@ -66,9 +66,10 @@ function Register() {
 							required={true}
 							onChange={handleChange}
 						/>
-						<Button type="submit" text="Register" onSubmit={handleSubmit}/>
+						{error && <p className="text-red-500 text-sm">{error}</p>}
+						<Button type="submit" text="Register"/>
 						<p className="text-center">Already have an account?</p>
-						<Button type="submit" text="Login"/>
+						<Button type="button" text="Login" onClick={() => navigate("/login")}/>
 					</form>
 				</div>
 			</div>

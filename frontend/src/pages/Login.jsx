@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
+import { loginUser } from "../api/api";
 
 function Login() {
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+	});
+	const [error, setError] = useState("");
+	const navigate = useNavigate();
+	const { login } = useContext(AuthContext);
+
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const { data } = await loginUser(formData);
+			login(data.user, data.token);
+			navigate("/home");
+		} catch (error) {
+			setError(error.response?.data?.message);
+		}
+	};
+
 	return (
 		<div className="min-h-screen flex border-2">
 			<div className="flex-1 flex justify-center items-center">
@@ -19,22 +45,37 @@ function Login() {
 						Welcome Back!
 					</h1>
 					<h2 className="text-2xl font-bold mb-6">Login</h2>
-					<form action="" className="flex flex-col space-y-4">
+					<form
+						onSubmit={handleSubmit}
+						className="flex flex-col space-y-4"
+					>
 						<Input
 							type="email"
 							name="email"
 							placeholder="Email"
 							required={true}
+							onChange={handleChange}
 						/>
 						<Input
 							type="password"
 							name="password"
 							placeholder="Password"
 							required={true}
+							onChange={handleChange}
 						/>
-						<Button type="submit" text="Register" />
+						{error && (
+							<p className="text-red-500 text-sm text-center">
+								{error}
+							</p>
+						)}
+
+						<Button type="submit" text="Login" />
 						<p className="text-center">Don't have an account?</p>
-						<Button type="submit" text="Sign Up" />
+						<Button
+							type="button"
+							text="Sign Up"
+							onClick={() => navigate("/register")}
+						/>
 					</form>
 				</div>
 			</div>

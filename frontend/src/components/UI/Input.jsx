@@ -7,7 +7,7 @@ function Input({ type, name, placeholder, required = false, onChange }) {
 			name={name}
 			placeholder={placeholder}
 			required={required}
-			onChange={onchange}
+			onChange={onChange}
 			className="border-2 p-2 rounded-md"
 		/>
 	);
