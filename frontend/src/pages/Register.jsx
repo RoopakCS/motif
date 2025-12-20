@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
 import { registerUser } from "../api/api";
+import { Link } from "react-router-dom";
 
 function Register() {
 	const [formData, setFormData] = useState({
@@ -68,8 +69,7 @@ function Register() {
 						/>
 						{error && <p className="text-red-500 text-sm">{error}</p>}
 						<Button type="submit" text="Register"/>
-						<p className="text-center">Already have an account?</p>
-						<Button type="button" text="Login" onClick={() => navigate("/login")}/>
+						<Link className="text-center" to={"/login"}>Already have an account?</Link>
 					</form>
 				</div>
 			</div>

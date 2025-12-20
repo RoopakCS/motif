@@ -2,8 +2,9 @@ import React, { useContext, useState } from "react";
 import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { loginUser } from "../api/api";
+import {Link} from "react-router-dom"
 
 function Login() {
 	const [formData, setFormData] = useState({
@@ -70,12 +71,7 @@ function Login() {
 						)}
 
 						<Button type="submit" text="Login" />
-						<p className="text-center">Don't have an account?</p>
-						<Button
-							type="button"
-							text="Sign Up"
-							onClick={() => navigate("/register")}
-						/>
+						<Link className="text-center" to={"/register"}>Don't have an account?</Link>
 					</form>
 				</div>
 			</div>

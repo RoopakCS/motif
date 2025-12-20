@@ -5,7 +5,7 @@ function Button({ type, text, onClick }) {
 		<button
 			type={type}
 			onClick={onClick}
-			className="border-2 w-full rounded-md cursor-pointer p-2"
+			className="border-2 w-full rounded-md cursor-pointer p-2 bg-black text-white"
 		>
 			{text}
 		</button>
