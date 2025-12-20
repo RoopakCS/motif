@@ -24,7 +24,7 @@ function Login() {
 		try {
 			const { data } = await loginUser(formData);
 			login(data.user, data.token);
-			navigate("/home");
+			navigate("/dashboard");
 		} catch (error) {
 			setError(error.response?.data?.message);
 		}
@@ -71,7 +71,7 @@ function Login() {
 						)}
 
 						<Button type="submit" text="Login" />
-						<Link className="text-center" to={"/register"}>Don't have an account?</Link>
+						<Link className="text-center underline" to={"/register"}>Don't have an account?</Link>
 					</form>
 				</div>
 			</div>

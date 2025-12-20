@@ -25,7 +25,7 @@ function Register() {
 		try {
 			const {data} = await registerUser(formData)
 			login(data.user, data.token)
-			navigate("/home")
+			navigate("/dashboard")
 		} catch (error) {
 			setError(error.response?.data?.message || "Registration Failed")
 		}
@@ -69,7 +69,7 @@ function Register() {
 						/>
 						{error && <p className="text-red-500 text-sm">{error}</p>}
 						<Button type="submit" text="Register"/>
-						<Link className="text-center" to={"/login"}>Already have an account?</Link>
+						<Link className="text-center underline" to={"/login"}>Already have an account?</Link>
 					</form>
 				</div>
 			</div>
