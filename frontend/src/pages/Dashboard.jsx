@@ -15,7 +15,7 @@ function Dashboard() {
 	return (
 		<DashboardLayout>
 			<SideBar progressions={progressions} onSelect={setSelected}/>
-			<Workspace />
+			<Workspace selectedProgression={selected}/>
 		</DashboardLayout>
 	);
 }

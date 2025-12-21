@@ -19,7 +19,8 @@ function SideBar({ progressions, onSelect }) {
 					<SidebarSongCard
 						key={progression._id}
 						name={progression.title}
-						onCLick={() => onSelect(progression)}
+						progression={progression}
+						onSelect={onSelect}
 					/>
 				))}
 			</div>
