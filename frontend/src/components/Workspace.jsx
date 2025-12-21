@@ -1,6 +1,14 @@
-function Workspace() {
+function Workspace({selectedProgression}) {
+    if(!selectedProgression) {
+        return(
+            <div className="">
+                Select or create a chord progression
+            </div>
+        )
+    }
+
     return(
-        <div>Workspace</div>
+        <div className="border border-black">{selectedProgression.title}</div>
     ) 
 }
 
