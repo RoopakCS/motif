@@ -43,8 +43,8 @@ function Register() {
 
 			<div className="flex-1 flex flex-col justify-center items-center p-10">
 				<div className="w-full max-w-sm">
-					<h1 className="text-4xl font-extrabold mb-2">Welcome!</h1>
-					<h2 className="text-2xl font-bold mb-6">Sign Up</h2>
+					<h1 className="text-4xl font-extrabold mb-2 text-primary-text">Welcome!</h1>
+					<h2 className="text-2xl font-bold mb-6 text-primary-text">Sign Up</h2>
 					<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 						<Input
 							type="text"
@@ -69,7 +69,7 @@ function Register() {
 						/>
 						{error && <p className="text-red-500 text-sm">{error}</p>}
 						<Button type="submit" text="Register"/>
-						<Link className="text-center underline" to={"/login"}>Already have an account?</Link>
+						<Link className="text-center underline text-secondary-text" to={"/login"}>Already have an account?</Link>
 					</form>
 				</div>
 			</div>

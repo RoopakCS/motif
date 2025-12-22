@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
 	return (
-		<div className="font-poppins">
+		<div className="font-poppins bg-bg">
 			<AuthProvider>
 				<Router>
 					<Routes>

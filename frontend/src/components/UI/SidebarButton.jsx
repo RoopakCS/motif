@@ -1,6 +1,6 @@
-function SidebarButton({ icon, name }) {
+function SidebarButton({ icon, name, onClick }) {
 	return (
-		<button className="flex items-center gap-2 w-full border border-black p-2 my-2 cursor-pointer">
+		<button className="flex items-center gap-2 w-full p-2 my-2 cursor-pointer hover:bg-surface-hover" onClick={onClick}>
 			{icon}
 			<span>{name}</span>
 		</button>

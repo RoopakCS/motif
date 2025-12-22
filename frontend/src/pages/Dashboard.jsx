@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "../components/SideBar";
-import { getUserProgression } from "../api/api";
+import { getUserProgressions } from "../api/api";
 import Workspace from "../components/Workspace";
 import DashboardLayout from "../layouts/DashboardLayout";
 
@@ -9,13 +9,28 @@ function Dashboard() {
 	const [selected, setSelected] = useState(null);
 
 	useEffect(() => {
-		getUserProgression().then((res) => setProgressions(res.data));
+		getUserProgressions().then((res) => setProgressions(res.data));
 	}, []);
+
+	const handleClick = () => {
+		setSelected({
+			title: "Unknown Song",
+			artistName: "Unknown",
+			timeSignature: "4/4",
+			scaleKey: "C Major",
+			chords: [],
+			isNew: true,
+		});
+	};
 
 	return (
 		<DashboardLayout>
-			<SideBar progressions={progressions} onSelect={setSelected}/>
-			<Workspace selectedProgression={selected}/>
+			<SideBar
+				progressions={progressions}
+				onSelect={setSelected}
+				onClick={handleClick}
+			/>
+			<Workspace selectedProgression={selected} />
 		</DashboardLayout>
 	);
 }

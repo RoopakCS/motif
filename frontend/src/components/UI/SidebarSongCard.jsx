@@ -1,10 +1,10 @@
-function SidebarSongCard({ name, onSelect, progression }) {
+function SidebarSongCard({ onSelect, progression }) {
 	return (
 		<button
-			className="border boder-black w-full p-2 my-1 cursor-pointer text-left"
+			className="w-full p-2 my-1 cursor-pointer text-left hover:bg-surface-hover"
 			onClick={() => onSelect(progression)}
 		>
-			{name}
+			{progression.title}
 		</button>
 	);
 }

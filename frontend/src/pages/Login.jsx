@@ -42,10 +42,10 @@ function Login() {
 
 			<div className="flex-1 flex flex-col justify-center items-center p-10">
 				<div className="w-full max-w-sm">
-					<h1 className="text-4xl font-extrabold mb-2">
+					<h1 className="text-4xl font-extrabold mb-2 text-primary-text">
 						Welcome Back!
 					</h1>
-					<h2 className="text-2xl font-bold mb-6">Login</h2>
+					<h2 className="text-2xl font-bold mb-6 text-primary-text">Login</h2>
 					<form
 						onSubmit={handleSubmit}
 						className="flex flex-col space-y-4"
@@ -71,7 +71,7 @@ function Login() {
 						)}
 
 						<Button type="submit" text="Login" />
-						<Link className="text-center underline" to={"/register"}>Don't have an account?</Link>
+						<Link className="text-center underline text-secondary-text" to={"/register"}>Don't have an account?</Link>
 					</form>
 				</div>
 			</div>

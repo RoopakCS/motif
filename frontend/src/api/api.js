@@ -14,5 +14,5 @@ export const loginUser = (formData) => API.post("/auth/login", formData);
 export const createProgression = (data) => API.post("/progressions/", data);
 export const updateProgression = (id, data) =>
 	API.put(`/progressions/${id}`, data);
-export const getUserProgression = () => API.get(`/progressions/`);
+export const getUserProgressions = () => API.get(`/progressions/`);
 export const deleteProgression = (id) => API.delete(`/progressions/${id}`);
