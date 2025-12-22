@@ -3,6 +3,7 @@ import SideBar from "../components/SideBar";
 import { getUserProgressions } from "../api/api";
 import Workspace from "../components/Workspace";
 import DashboardLayout from "../layouts/DashboardLayout";
+import { CloudCog } from "lucide-react";
 
 function Dashboard() {
 	const [progressions, setProgressions] = useState([]);
@@ -23,6 +24,25 @@ function Dashboard() {
 		});
 	};
 
+	const handleSaved = (saved) => {
+		setProgressions((prev) => {
+			const exists = prev.find((p) => p._id === saved._id);
+
+			if (exists) {
+				return prev.map((p) => (p._id === saved._id ? saved : p));
+			}
+
+			return [saved, ...prev];
+		});
+
+		setSelected(saved);
+	};
+
+	const handleDeleted = (id) => {
+		setProgressions((prev) => prev.filter((p) => p._id !== id));
+		setSelected(null);
+	};
+
 	return (
 		<DashboardLayout>
 			<SideBar
@@ -30,7 +50,11 @@ function Dashboard() {
 				onSelect={setSelected}
 				onClick={handleClick}
 			/>
-			<Workspace selectedProgression={selected} />
+			<Workspace
+				selectedProgression={selected}
+				onSaved={handleSaved}
+				onDeleted={handleDeleted}
+			/>
 		</DashboardLayout>
 	);
 }
