@@ -23,6 +23,10 @@ function SideBar({ progressions, onSelect, onClick }) {
 					/>
 				))}
 			</div>
+
+			<button>
+				Logout
+			</button>
 		</div>
 	);
 }

@@ -5,14 +5,17 @@ import {
 	deleteProgression,
 	updateProgression,
 } from "../api/api";
+import ChordGrid from "./ChordGrid";
 
 function Workspace({ selectedProgression, onSaved, onDeleted }) {
 	const [form, setForm] = useState(null);
 	const [saving, setSaving] = useState(false);
 	const [deleting, setDeleting] = useState(false);
+	const [selectedSlot, setSelectedSlot] = useState(null);
 
 	useEffect(() => {
 		setForm(selectedProgression);
+		setSelectedSlot(null);
 	}, [selectedProgression]);
 
 	if (!form) {
@@ -74,6 +77,28 @@ function Workspace({ selectedProgression, onSaved, onDeleted }) {
 		}
 	};
 
+	const handleChordEdit = (chordName) => {
+		const { measure, beat, chord } = selectedSlot;
+
+		const otherChords = form.chords.filter((c) => c.measure !== measure);
+		const measureChords = form.chords.filter((c) => c.measure === measure);
+
+		if (chord) {
+			measureChords[beat] = {
+				...measureChords[beat],
+				chord: chordName,
+			};
+		} else {
+			measureChords.splice(beat, 0, {
+				measure,
+				chord: chordName,
+				duration: 1,
+			});
+		}
+
+		setForm({ ...form, chords: [...otherChords, ...measureChords] });
+	};
+
 	return (
 		<div className="text-primary flex-1 p-6">
 			<input
@@ -83,6 +108,8 @@ function Workspace({ selectedProgression, onSaved, onDeleted }) {
 					handleChange("title", e.target.value);
 				}}
 			/>
+
+			<br />
 
 			<input
 				className="text-2xl bg-transparent outline-none"
@@ -121,6 +148,26 @@ function Workspace({ selectedProgression, onSaved, onDeleted }) {
 			<button className="cursor-pointer" onClick={handleDelete}>
 				{deleting ? "Deleting..." : "Delete"}
 			</button>
+
+			<ChordGrid
+				chords={form.chords}
+				timeSignature={form.timeSignature}
+				onSelect={setSelectedSlot}
+			/>
+
+			{selectedSlot && (
+				<div className="">
+					<p>
+						Measure {selectedSlot.measure}, Beat{" "}
+						{selectedSlot.beat + 1}
+					</p>
+					<input
+						type="text"
+						value={selectedSlot.chord?.chord || ""}
+						onChange={(e) => handleChordEdit(e.target.value)}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

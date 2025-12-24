@@ -19,13 +19,15 @@ function App() {
 	return (
 		<div className="font-poppins bg-bg">
 			<AuthProvider>
-				<Router>
-					<Routes>
-						<Route path="/login" element={<Login />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/dashboard" element={<Dashboard />} />
-					</Routes>
-				</Router>
+				<ProtectedRoute>
+					<Router>
+						<Routes>
+							<Route path="/login" element={<Login />} />
+							<Route path="/register" element={<Register />} />
+							<Route path="/dashboard" element={<Dashboard />} />
+						</Routes>
+					</Router>
+				</ProtectedRoute>
 			</AuthProvider>
 		</div>
 	);
