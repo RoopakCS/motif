@@ -4,7 +4,7 @@ function ChordGrid({ chords, timeSignature = "4/4", onSelect }) {
 
 	const findChord = (measure, beat) =>
 		chords.find((c) => c.measure === measure && c.beat === beat);
-	
+
 	return (
 		<div className="space-y-4">
 			{Array.from({ length: measures }).map((_, m) => {
@@ -15,7 +15,7 @@ function ChordGrid({ chords, timeSignature = "4/4", onSelect }) {
 						key={measureNumber}
 						className="flex items-center gap-4"
 					>
-						<span className="w-8 text-sm">{measureNumber}</span>
+						<span className="w-2 md:w-8 text-sm">{measureNumber}</span>
 
 						<div
 							className="grid gap-3 flex-1"
@@ -36,7 +36,7 @@ function ChordGrid({ chords, timeSignature = "4/4", onSelect }) {
 												beat: b,
 											})
 										}
-										className={`h-14 rounded-lg text-lg font-semibold cursor-pointer ${
+										className={`h-12 md:h-14 rounded-lg text-sm md:text-lg font-semibold cursor-pointer ${
 											chord
 												? "bg-slate-800 text-white"
 												: "bg-slate-400/40 hover:bg-slate-700"

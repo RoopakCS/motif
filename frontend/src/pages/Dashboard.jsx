@@ -3,11 +3,12 @@ import SideBar from "../components/SideBar";
 import { getUserProgressions } from "../api/api";
 import Workspace from "../components/Workspace";
 import DashboardLayout from "../layouts/DashboardLayout";
-import { CloudCog } from "lucide-react";
+import { CloudCog, Menu } from "lucide-react";
 
 function Dashboard() {
 	const [progressions, setProgressions] = useState([]);
 	const [selected, setSelected] = useState(null);
+	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	useEffect(() => {
 		getUserProgressions().then((res) => setProgressions(res.data));
@@ -45,10 +46,25 @@ function Dashboard() {
 
 	return (
 		<DashboardLayout>
+			<div className="md:hidden flex text-primary py-6 px-2">
+				<Menu
+					onClick={() => setSidebarOpen(true)}
+					className="cursor-pointer"
+				/>
+			</div>
+
 			<SideBar
 				progressions={progressions}
-				onSelect={setSelected}
-				onClick={handleClick}
+				onSelect={(p) => {
+					setSelected(p);
+					setSidebarOpen(false);
+				}}
+				onClick={() => {
+					handleClick;
+					setSidebarOpen(false);
+				}}
+				isOpen={sidebarOpen}
+				onClose={() => setSidebarOpen(false)}
 			/>
 			<Workspace
 				selectedProgression={selected}

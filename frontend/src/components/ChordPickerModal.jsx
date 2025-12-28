@@ -13,29 +13,31 @@ function ChordPickerModal({ scaleKey, onSelect, onClose }) {
 					</button>
 				</div>
 
-				<div className="grid grid-cols-3 gap-2">
-					{chords.map((chord) => (
+				{chords.length != 0 ? (
+					<div className="grid grid-cols-3 gap-2">
+						{chords.map((chord) => (
+							<button
+								key={chord}
+								onClick={() => {
+									onSelect(chord);
+									onClose();
+								}}
+								className="p-2 rounded border hover:bg-surface-hover cursor-pointer"
+							>
+								{chord}
+							</button>
+						))}
 						<button
-							key={chord}
+							className="p-2 rounded border border-error text-error hover:bg-surface-hover cursor-pointer"
 							onClick={() => {
-								onSelect(chord);
+								onSelect("");
 								onClose();
 							}}
-							className="p-2 rounded border hover:bg-surface-hover cursor-pointer"
 						>
-							{chord}
+							Remove
 						</button>
-					))}
-					<button
-						className="p-2 rounded border border-error text-error hover:bg-surface-hover cursor-pointer"
-						onClick={() => {
-							onSelect("");
-							onClose();
-						}}
-					>
-						Remove
-					</button>
-				</div>
+					</div>
+				) : <p>Invalid Scale</p> }
 			</div>
 		</div>
 	);
