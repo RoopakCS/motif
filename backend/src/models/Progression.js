@@ -1,5 +1,28 @@
 const { default: mongoose } = require("mongoose");
 
+const chordSchema = mongoose.Schema({
+	measure: {
+		required: true,
+		type: Number,
+		min: 1,
+	},
+	beat: {
+		required: true,
+		type: Number,
+		min: 0,
+	},
+	chord: {
+		required: true,
+		type: String,
+		trim: true,
+	},
+	duration: {
+		type: Number,
+		default: 1,
+		min: 1,
+	},
+});
+
 const ProgressionSchema = mongoose.Schema(
 	{
 		user: {
@@ -24,13 +47,7 @@ const ProgressionSchema = mongoose.Schema(
 			type: String,
 			default: "4/4",
 		},
-		chords: [
-			{
-				measure: Number,
-				chord: String,
-				duration: Number,
-			},
-		],
+		chords: [chordSchema],
 		tags: [String],
 	},
 	{
@@ -38,4 +55,4 @@ const ProgressionSchema = mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model("Progression", ProgressionSchema)
+module.exports = mongoose.model("Progression", ProgressionSchema);

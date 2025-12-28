@@ -1,19 +1,14 @@
 function ChordGrid({ chords, timeSignature = "4/4", onSelect }) {
 	const beats = parseInt(timeSignature.split("/")[0]);
+	const measures = 8;
 
-	const grouped = chords.reduce((acc, chord) => {
-		acc[chord.measure] = acc[chord.measure] || [];
-		acc[chord.measure].push(chord);
-		return acc;
-	}, {});
-
-	const measures = Object.keys(grouped).length || 8;
-
+	const findChord = (measure, beat) =>
+		chords.find((c) => c.measure === measure && c.beat === beat);
+	
 	return (
 		<div className="space-y-4">
-			{Array.from({ length: measures }).map((_, i) => {
-				const measureNumber = i + 1;
-				const measureChords = (grouped[measureNumber] || []).slice();
+			{Array.from({ length: measures }).map((_, m) => {
+				const measureNumber = m + 1;
 
 				return (
 					<div
@@ -28,31 +23,29 @@ function ChordGrid({ chords, timeSignature = "4/4", onSelect }) {
 								gridTemplateColumns: `repeat(${beats}, minmax(0, 1fr))`,
 							}}
 						>
-							{Array.from({ length: beats }).map(
-								(_, beatIndex) => {
-									const chord = measureChords[beatIndex];
+							{Array.from({ length: beats }).map((_, b) => {
+								const chord = findChord(measureNumber, b);
 
-									return (
-										<button
-											key={beatIndex}
-											onClick={() =>
-												onSelect?.({
-													chord,
-													measure: measureNumber,
-													beat: beatIndex,
-												})
-											}
-											className={`h-14 rounded-lg text-lg font-semibold cursor-pointer ${
-												chord?.chord
-													? "bg-slate-800 text-white"
-													: "bg-slate-400/40 hover:bg-slate-700"
-											}`}
-										>
-											{chord?.chord || ""}
-										</button>
-									);
-								}
-							)}
+								return (
+									<button
+										key={b}
+										onClick={() =>
+											onSelect?.({
+												chord,
+												measure: measureNumber,
+												beat: b,
+											})
+										}
+										className={`h-14 rounded-lg text-lg font-semibold cursor-pointer ${
+											chord
+												? "bg-slate-800 text-white"
+												: "bg-slate-400/40 hover:bg-slate-700"
+										}`}
+									>
+										{chord?.chord || ""}
+									</button>
+								);
+							})}
 						</div>
 					</div>
 				);

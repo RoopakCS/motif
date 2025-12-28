@@ -80,25 +80,22 @@ function Workspace({ selectedProgression, onSaved, onDeleted }) {
 	};
 
 	const handleChordEdit = (chordName) => {
-		const { measure, beat, chord } = selectedSlot;
+		const { measure, beat } = selectedSlot;
 
-		const otherChords = form.chords.filter((c) => c.measure !== measure);
-		const measureChords = form.chords.filter((c) => c.measure === measure);
+		const updated = form.chords.filter(
+			(c) => !(c.measure === measure && c.beat === beat)
+		);
 
-		if (chord) {
-			measureChords[beat] = {
-				...measureChords[beat],
-				chord: chordName,
-			};
-		} else {
-			measureChords.splice(beat, 0, {
+		if (chordName) {
+			updated.push({
 				measure,
+				beat,
 				chord: chordName,
 				duration: 1,
 			});
 		}
 
-		setForm({ ...form, chords: [...otherChords, ...measureChords] });
+		setForm({ ...form, chords: updated });
 	};
 
 	return (
