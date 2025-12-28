@@ -6,12 +6,14 @@ import {
 	updateProgression,
 } from "../api/api";
 import ChordGrid from "./ChordGrid";
+import ChordPickerModal from "./ChordPickerModal";
 
 function Workspace({ selectedProgression, onSaved, onDeleted }) {
 	const [form, setForm] = useState(null);
 	const [saving, setSaving] = useState(false);
 	const [deleting, setDeleting] = useState(false);
 	const [selectedSlot, setSelectedSlot] = useState(null);
+	const [showChordPicker, setShowChordPicker] = useState(false);
 
 	useEffect(() => {
 		setForm(selectedProgression);
@@ -152,21 +154,21 @@ function Workspace({ selectedProgression, onSaved, onDeleted }) {
 			<ChordGrid
 				chords={form.chords}
 				timeSignature={form.timeSignature}
-				onSelect={setSelectedSlot}
+				onSelect={(slot) => {
+					setSelectedSlot(slot);
+					setShowChordPicker(true);
+				}}
 			/>
 
-			{selectedSlot && (
-				<div className="">
-					<p>
-						Measure {selectedSlot.measure}, Beat{" "}
-						{selectedSlot.beat + 1}
-					</p>
-					<input
-						type="text"
-						value={selectedSlot.chord?.chord || ""}
-						onChange={(e) => handleChordEdit(e.target.value)}
-					/>
-				</div>
+			{showChordPicker && selectedSlot && (
+				<ChordPickerModal
+					scaleKey={form.scaleKey}
+					onSelect={(chordName) => {
+						handleChordEdit(chordName);
+						setShowChordPicker(false);
+					}}
+					onClose={() => setShowChordPicker(false)}
+				/>
 			)}
 		</div>
 	);

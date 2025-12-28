@@ -43,7 +43,7 @@ function ChordGrid({ chords, timeSignature = "4/4", onSelect }) {
 												})
 											}
 											className={`h-14 rounded-lg text-lg font-semibold cursor-pointer ${
-												chord
+												chord?.chord
 													? "bg-slate-800 text-white"
 													: "bg-slate-400/40 hover:bg-slate-700"
 											}`}
