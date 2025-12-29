@@ -46,11 +46,11 @@ function Dashboard() {
 
 	return (
 		<DashboardLayout>
-			<div className="md:hidden flex text-primary py-6 px-2">
-				<Menu
-					onClick={() => setSidebarOpen(true)}
-					className="cursor-pointer"
-				/>
+			<div className="relative md:hidden flex items-center text-primary py-6 px-2">
+				<Menu onClick={() => setSidebarOpen(true)} />
+				<h1 className="absolute left-1/2 -translate-x-1/2 text-2xl font-bold text-center">
+					MOTIF
+				</h1>
 			</div>
 
 			<SideBar
@@ -66,6 +66,7 @@ function Dashboard() {
 				isOpen={sidebarOpen}
 				onClose={() => setSidebarOpen(false)}
 			/>
+
 			<Workspace
 				selectedProgression={selected}
 				onSaved={handleSaved}

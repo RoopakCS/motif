@@ -31,21 +31,21 @@ function Login() {
 	};
 
 	return (
-		<div className="min-h-screen flex border-2">
-			<div className="flex-1 flex justify-center items-center">
+		<div className="h-dvh flex">
+			<div className="hidden md:flex md:flex-1 justify-center items-center">
 				<img
 					src="images/PNG/music file2-01.png"
 					alt=""
-					// className="max-w-md w-3/4 object-contain"
+					className="hidden md:block"
 				/>
 			</div>
 
-			<div className="flex-1 flex flex-col justify-center items-center p-10">
+			<div className="flex-1 flex flex-col justify-center items-center p-6 md:p-10">
 				<div className="w-full max-w-sm">
-					<h1 className="text-4xl font-extrabold mb-2 text-primary-text">
+					<h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-primary-text">
 						Welcome Back!
 					</h1>
-					<h2 className="text-2xl font-bold mb-6 text-primary-text">Login</h2>
+					<h2 className="text-xl md:text-2xl font-bold mb-6 text-primary-text">Login</h2>
 					<form
 						onSubmit={handleSubmit}
 						className="flex flex-col space-y-4"

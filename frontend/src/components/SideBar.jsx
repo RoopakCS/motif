@@ -1,9 +1,14 @@
-import React from "react";
-import { Plus, Menu, X } from "lucide-react";
+import React, { useContext } from "react";
+import { Plus, X } from "lucide-react";
 import SidebarButton from "./UI/SidebarButton";
 import SidebarSongCard from "./UI/SidebarSongCard";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function SideBar({ progressions, onSelect, onClick, isOpen, onClose }) {
+	const { logout } = useContext(AuthContext);
+	const navigate = useNavigate();
+
 	return (
 		<>
 			{isOpen && (
@@ -18,11 +23,11 @@ function SideBar({ progressions, onSelect, onClick, isOpen, onClose }) {
 				} md:translate-x-0 flex flex-col`}
 			>
 				<div className="flex items-center justify-between p-4">
-					<h1 className="text-4xl font-bold">MOTIF</h1>
-					{/* <Menu className="md:hidden cursor-pointer" onClick={onClose} /> */}
-					<button className="md:hidden cursor-pointer" onClick={onclose}>
-						<X />
-					</button>
+					<h1 className="hidden md:block text-4xl font-bold">
+						MOTIF
+					</h1>
+					<h1 className="md:hidden text-xl font-semibold">Menu</h1>
+					<X className="md:hidden cursor-pointer" onClick={onClose} />
 				</div>
 
 				<div className="">
@@ -34,7 +39,7 @@ function SideBar({ progressions, onSelect, onClick, isOpen, onClose }) {
 					{/* <SidebarButton icon={<Music />} name={"Favourites"} onClick={onClick}/> */}
 				</div>
 
-				<h2 className="font-medium p-4">All Songs</h2>
+				<h2 className="text-xl font-semibold p-4">All Songs</h2>
 				<div className="flex-1 overflow-y-auto">
 					{progressions.map((progression) => (
 						<SidebarSongCard
@@ -46,7 +51,15 @@ function SideBar({ progressions, onSelect, onClick, isOpen, onClose }) {
 				</div>
 
 				<div className="p-4 border-t border-white/10">
-					<button className="text-sm opacity-70 hover:opacity-100 cursor-pointer">Logout</button>
+					<button
+						className="text-sm opacity-70 hover:opacity-100 cursor-pointer"
+						onClick={() => {
+							logout();
+							navigate("/login");
+						}}
+					>
+						Logout
+					</button>
 				</div>
 			</div>
 		</>

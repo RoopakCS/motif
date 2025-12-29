@@ -11,23 +11,36 @@ import { AuthContext, AuthProvider } from "./context/AuthContext";
 import Register from "./pages/Register";
 
 const ProtectedRoute = ({ children }) => {
-	const user = useContext(AuthContext);
-	return user ? children : <Navigate to="/login" />;
+	const {user} = useContext(AuthContext);
+	// console.log("ProtectedRoute user:", context);
+
+	return user ? children : <Navigate to="/login" replace />;
 };
 
 function App() {
 	return (
-		<div className="font-poppins bg-bg">
+		<div className="md:font-poppins h-dvh bg-bg">
 			<AuthProvider>
-				<ProtectedRoute>
-					<Router>
-						<Routes>
-							<Route path="/login" element={<Login />} />
-							<Route path="/register" element={<Register />} />
-							<Route path="/dashboard" element={<Dashboard />} />
-						</Routes>
-					</Router>
-				</ProtectedRoute>
+				<Router>
+					<Routes>
+						<Route path="/login" element={<Login />} />
+						<Route path="/register" element={<Register />} />
+
+						<Route
+							path="/dashboard"
+							element={
+								// <ProtectedRoute>
+									<Dashboard />
+								// </ProtectedRoute>
+							}
+						/>
+
+						<Route
+							path="*"
+							element={<Navigate to="/dashboard" />}
+						/>
+					</Routes>
+				</Router>
 			</AuthProvider>
 		</div>
 	);

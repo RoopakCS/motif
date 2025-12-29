@@ -32,8 +32,8 @@ function Register() {
 	};
 
 	return (
-		<div className="min-h-screen flex border-2">
-			<div className="flex-1 flex justify-center items-center">
+		<div className="h-dvh flex">
+			<div className="hidden  md:flex-1 md:flex justify-center items-center">
 				<img
 					src="images/PNG/music file2-01.png"
 					alt=""
@@ -43,8 +43,8 @@ function Register() {
 
 			<div className="flex-1 flex flex-col justify-center items-center p-10">
 				<div className="w-full max-w-sm">
-					<h1 className="text-4xl font-extrabold mb-2 text-primary-text">Welcome!</h1>
-					<h2 className="text-2xl font-bold mb-6 text-primary-text">Sign Up</h2>
+					<h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-primary-text">Welcome!</h1>
+					<h2 className="text-xxl md:text-2xl font-bold mb-6 text-primary-text">Sign Up</h2>
 					<form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 						<Input
 							type="text"

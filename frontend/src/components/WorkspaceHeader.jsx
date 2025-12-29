@@ -13,7 +13,7 @@ function WorkspaceHeader({
 			<div className="space-y-2">
 				{/* Title */}
 				<input
-					className="text-4xl font-semibold bg-transparent outline-none w-full"
+					className="text-3xl md:text-4xl font-semibold bg-transparent outline-none w-full"
 					value={form.title}
 					onChange={(e) => handleChange("title", e.target.value)}
 				/>
@@ -57,7 +57,7 @@ function WorkspaceHeader({
 					<button
 						onClick={handleSave}
 						disabled={saving}
-						className="px-3 py-1 rounded-md border border-white/20 hover:bg-white/10 disabled:opacity-50"
+						className="text-sm md:text-base px-3 py-1 rounded-md border border-white/20 hover:bg-white/10 disabled:opacity-50"
 					>
 						{saving ? "Saving…" : "Save"}
 					</button>
@@ -65,7 +65,7 @@ function WorkspaceHeader({
 					<button
 						onClick={handleDelete}
 						disabled={deleting}
-						className="px-3 py-1 rounded-md border border-red-500/40 text-red-400 hover:bg-red-500/10 disabled:opacity-50"
+						className="text-sm md:text-base px-3 py-1 rounded-md border border-red-500/40 text-red-400 hover:bg-red-500/10 disabled:opacity-50"
 					>
 						{deleting ? "Deleting…" : "Delete"}
 					</button>
