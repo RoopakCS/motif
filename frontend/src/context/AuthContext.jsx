@@ -5,33 +5,38 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [token, setToken] = useState(localStorage.getItem("token") || "");
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		const storedUser = localStorage.getItem("user")
-		if(storedUser) {
-			setUser(JSON.parse(storedUser))
+		try {
+			const storedUser = localStorage.getItem("user")
+			const storedToken = localStorage.getItem("token")
+
+			if(storedUser && storedToken) {
+				setUser(JSON.parse(storedUser))
+				setToken(storedToken)
+			}
+		} finally {
+			setLoading(false)
 		}
 	}, [])
-
-	useEffect(() => {
-		if (token) localStorage.setItem("token", token);
-		else localStorage.removeItem("token");
-	}, [token]);
 
 	const login = (userData, jwtToken) => {
 		setUser(userData);
 		setToken(jwtToken);
 		localStorage.setItem("user", JSON.stringify(userData));
+		localStorage.setItem("token", jwtToken)
 	};
 
 	const logout = () => {
 		setUser(null);
 		setToken("");
 		localStorage.removeItem("user");
+		localStorage.removeItem("token");
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, token, login, logout }}>
+		<AuthContext.Provider value={{ user, token, loading, login, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);

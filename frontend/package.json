@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.14",
     "@tonaljs/tonal": "^4.10.0",
     "axios": "^1.12.2",
+    "ldrs": "^1.1.9",
     "lucide-react": "^0.548.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

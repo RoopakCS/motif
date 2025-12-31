@@ -11,10 +11,17 @@ import { AuthContext, AuthProvider } from "./context/AuthContext";
 import Register from "./pages/Register";
 
 const ProtectedRoute = ({ children }) => {
-	const {user} = useContext(AuthContext);
-	// console.log("ProtectedRoute user:", context);
+	const { user, token, loading } = useContext(AuthContext);
 
-	return user ? children : <Navigate to="/login" replace />;
+	if (loading) {
+		return (
+			<div className="h-screen flex items-center justify-center text-primary">
+				Loading…
+			</div>
+		);
+	}
+
+	return user && token ? children : <Navigate to="/login" replace />;
 };
 
 function App() {
