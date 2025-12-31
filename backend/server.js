@@ -16,7 +16,7 @@ app.use("/api/progressions", progressionRouter)
 mongoose
 	.connect(process.env.MONGO_URI)
 	.then(() => {
-		console.log("MongoDB Connected");
+		console.log(`MongoDB Connected: ${mongoose.connection.name}`);
 	})
 	.catch((error) => {
 		console.error(error.message);
