@@ -51,9 +51,9 @@ function SideBar({ progressions, onSelect, onClick, isOpen, onClose }) {
 					))}
 				</div>
 
-				<div className="p-4 border-t border-white/10">
+				{/* <div className="p-4 border-t border-white/10">
 					<InstallButton />
-				</div>
+				</div> */}
 				<div className="p-4 border-t border-white/10">
 					<button
 						className="text-sm opacity-70 hover:opacity-100 cursor-pointer"

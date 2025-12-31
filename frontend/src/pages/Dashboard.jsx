@@ -3,7 +3,7 @@ import SideBar from "../components/SideBar";
 import { getUserProgressions } from "../api/api";
 import Workspace from "../components/Workspace";
 import DashboardLayout from "../layouts/DashboardLayout";
-import { CloudCog, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 function Dashboard() {
 	const [progressions, setProgressions] = useState([]);
@@ -17,7 +17,7 @@ function Dashboard() {
 	const handleClick = () => {
 		setSelected({
 			title: "Unknown Song",
-			artistName: "Unknown",
+			artistName: "Unknown Artist",
 			timeSignature: "4/4",
 			scaleKey: "C Major",
 			chords: [],
@@ -60,7 +60,7 @@ function Dashboard() {
 					setSidebarOpen(false);
 				}}
 				onClick={() => {
-					handleClick;
+					handleClick();
 					setSidebarOpen(false);
 				}}
 				isOpen={sidebarOpen}

@@ -1,20 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors")
+const cors = require("cors");
 const authRouter = require("./src/routes/authRoutes.js");
-const progressionRouter = require("./src/routes/progressionRoutes.js")
+const progressionRouter = require("./src/routes/progressionRoutes.js");
 
 require("dotenv").config();
 
 const app = express();
-app.use(cors({
-	origin: [process.env.CLIENT_URL],
-	credentials: true
-}))
+app.use(
+	cors({
+		origin: [process.env.CLIENT_URL],
+		credentials: true,
+	})
+);
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
-app.use("/api/progressions", progressionRouter)
+app.use("/api/progressions", progressionRouter);
 
 mongoose
 	.connect(process.env.MONGO_URI)
