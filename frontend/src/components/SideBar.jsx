@@ -4,6 +4,7 @@ import SidebarButton from "./UI/SidebarButton";
 import SidebarSongCard from "./UI/SidebarSongCard";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import InstallButton from "./UI/InstallButton";
 
 function SideBar({ progressions, onSelect, onClick, isOpen, onClose }) {
 	const { logout } = useContext(AuthContext);
@@ -50,6 +51,9 @@ function SideBar({ progressions, onSelect, onClick, isOpen, onClose }) {
 					))}
 				</div>
 
+				<div className="p-4 border-t border-white/10">
+					<InstallButton />
+				</div>
 				<div className="p-4 border-t border-white/10">
 					<button
 						className="text-sm opacity-70 hover:opacity-100 cursor-pointer"
